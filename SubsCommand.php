@@ -9,7 +9,10 @@ class SubsCommand extends Command
 
     public function handle($arguments)
     {
-        $first_name = $this->telegram->getWebhookUpdates()->getMessage()->getChat()->getId();
-        $this->replyWithMessage(['text' => 'Ахахах. Что это?']);
+        $chat_id = $this->telegram->getWebhookUpdates()->getMessage()->getChat()->getId();
+        $res = getSubs($chat_id);
+        while ($row = $res->fetch_assoc()){
+            $this->replyWithMessage(['text' => 'Ахахах.' . $row['id'] .' Что это?' . $row['title']]);
+        }
     }
 }

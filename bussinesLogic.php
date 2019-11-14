@@ -104,6 +104,16 @@ function getTitle($rss_url)
     return $rss->channel->title;
 }
 
+
+function getSubs($chat_id)
+{
+    $connect = getConnect();
+    $stmt = $connect->prepare("SELECT rss.id as id, rss.title as title FROM rss_subs as s join rss where s.rss_id = rss.id and s.user_id = ?");
+    $stmt->bind_param('i', $chat_id);
+    $res = ($stmt->get_result());
+    return $res;
+}
+
 function getConnect()
 {
     return mysqli_connect('localhost',
