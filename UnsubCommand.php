@@ -12,7 +12,8 @@ class UnsubCommand extends Command
     {
 
         if ($arguments == null or empty($arguments)) {
-            $this->replyWithMessage(['text' => 'Для того, чтобы отписаться от RSS ленты введите её идентификатор. Пример: /unsubscribe 777']);
+            $this->replyWithMessage(['text' => 'Для того, чтобы отписаться от RSS ленты введите её идентификатор. 
+Пример: /unsubscribe 777']);
         } else {
             $user_id = $this->telegram->getWebhookUpdates()->getMessage()->getChat()->getId();
             if (unsubRss(intval($arguments), $user_id)) {

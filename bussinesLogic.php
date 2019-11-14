@@ -67,7 +67,10 @@ function subscribeRss($rss_url, $user_id)
 {
     $rss_id = getRssId($rss_url);
     if (isSub($user_id, $rss_id)) {
-        return false;
+        return 0;
+
+    } elseif (getTitle($rss_url) == null) {
+        return 2;
     } else {
         $connect = getConnect();
         $statement = $connect->prepare("INSERT INTO rss_subs (user_id, rss_id) values (?,?)");
@@ -75,7 +78,7 @@ function subscribeRss($rss_url, $user_id)
         $statement->execute();
         $statement->close();
         closeConnect($connect);
-        return true;
+        return 1;
     }
 }
 
