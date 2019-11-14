@@ -13,6 +13,6 @@ class SubsCommand extends Command
     public function handle($arguments)
     {
         $first_name = $this->telegram->getWebhookUpdates()->getMessage()->getChat()->getId();
-
+        $this->replyWithMessage(['text'=>'Ахахах. Что это?']);
     }
 }
